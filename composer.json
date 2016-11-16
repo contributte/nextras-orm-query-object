@@ -1,0 +1,30 @@
+{
+  "name": "minetro/nextras-orm-query-object",
+  "description": "QueryObjects for Nextras ORM",
+  "type": "library",
+  "license": ["BSD-3-Clause"],
+  "homepage": "https://github.com/minetro/nextras-orm-query-object",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc",
+      "homepage": "https://jfx.cz"
+    }
+  ],
+  "require": {
+    "php": ">= 5.6",
+    "nextras/dbal": "^2.0.0"
+  },
+  "require-dev": {
+    "nette/tester": "~1.7.1",
+    "nette/di": "^2.4.4",
+    "mockery/mockery": "^0.9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Minetro\\Nextras\\Orm\\QueryObject\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": ["tests"]
+  }
+}
