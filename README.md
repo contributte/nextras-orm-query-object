@@ -111,7 +111,7 @@ final class SimpleExecutableQueryObject extends ExecutableQueryObject
 ```
 
 ```php
-$qo = new SimpleExecutableQueryObject();
+$qo = new SimpleExecutableQueryObject($connection);
 $result = $qo->execute();
 ```
 
@@ -127,10 +127,10 @@ extensions:
 ```php
 use Minetro\Nextras\Orm\QueryObject\QueryObjectManager;
 
-final class MyFacade
+final class MyFacade1
 {
 
-    /** @var Minetro\Nextras\Orm\QueryObject **/
+    /** @var QueryObjectManager **/
     private $qom;
 
     public function foo()
@@ -138,6 +138,22 @@ final class MyFacade
         $qo = $this->qom->create(MyExtraQueryObject::class);
         $qo->setBar(1);
         $qo->setBaz(TRUE);
+        $result = $this->qom->fetch($qo);
+    }
+
+}
+```
+
+```php
+final class MyFacade2
+{
+
+    /** @var IMyQueryObjectFactory @inject **/
+    public $myQueryObjectFactory;
+
+    public function foobar()
+    {
+        $qo = $this->myQueryObjectFactory->create(1, TRUE);
         $result = $this->qom->fetch($qo);
     }
 
