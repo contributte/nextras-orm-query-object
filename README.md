@@ -64,7 +64,6 @@ final class FullQueryObject extends QueryObject
         return $builder->select('*')->from('foobar');
     }
     
-    
     /**
      * @param QueryBuilder $builder
      * @return QueryBuilder
