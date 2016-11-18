@@ -2,9 +2,12 @@ language: php
 php:
     - 5.6
     - 7.0
+    - 7.1
     - hhvm
 
 matrix:
+  fast_finish: true
+
   allow_failures:
       - php: hhvm
       - php: hhvm-nightly
@@ -36,10 +39,13 @@ before_script:
     - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then NTESTER_FLAGS="--coverage ./coverage.xml --coverage-src ./src"; else TESTER_FLAGS=""; fi
 
     # Setup MySQL
-    - mysql -e 'create database nextras;'
-    - mysql -u root -p nextras < tests/fixtures/mysql.sql
+    - mysql -e 'CREATE DATABASE nextras;'
+    - mysql -u travis nextras < tests/fixtures/mysql.sql
+    - mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
 
 script:
+    - composer run-script qa
+    - vendor/bin/tester tests/cases -s -p php -c tests/php-unix.ini -i
     - vendor/bin/tester tests/cases -s -p php -c tests/php-unix.ini $NTESTER_FLAGS
 
 after_script:
