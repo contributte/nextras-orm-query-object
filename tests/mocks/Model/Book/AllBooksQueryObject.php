@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Mocks;
+namespace Tests\Mocks\Model\Book;
 
 use Minetro\Nextras\Orm\QueryObject\QueryObject;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 
-final class SimpleQueryObject extends QueryObject
+final class AllBooksQueryObject extends QueryObject
 {
 
     /**
@@ -14,7 +14,7 @@ final class SimpleQueryObject extends QueryObject
      */
     public function doQuery(QueryBuilder $builder)
     {
-        return $builder->select('*')->from('foobar');
+        return $builder->select('[*]')->from('[book]', 'b');
     }
 
 }

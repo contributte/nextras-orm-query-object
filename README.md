@@ -73,15 +73,6 @@ final class FullQueryObject extends QueryObject
         return $builder;
     }
 
-    /**
-     * @param Result $result
-     * @return Result
-     */
-    protected function postResult(Result $result)
-    {
-        return $result;
-    }
-
 }
 ```
 
@@ -105,6 +96,15 @@ final class SimpleExecutableQueryObject extends ExecutableQueryObject
     public function doQuery(QueryBuilder $builder)
     {
         return $builder->select('*')->from('foobar');
+    }
+
+    /**
+     * @param Result $result
+     * @return Result
+     */
+    protected function postResult(Result $result)
+    {
+        return $result;
     }
 
 }

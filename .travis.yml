@@ -21,6 +21,9 @@ matrix:
 
 sudo: false
 
+services:
+  - mysql
+
 before_script:
     # Update Composer
     - travis_retry composer self-update
@@ -31,6 +34,10 @@ before_script:
     # Coveralls
     - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini >> ./tests/php-unix.ini; fi
     - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then NTESTER_FLAGS="--coverage ./coverage.xml --coverage-src ./src"; else TESTER_FLAGS=""; fi
+
+    # Setup MySQL
+    - mysql -e 'create database nextras;'
+    - mysql -u root -p nextras < tests/fixtures/mysql.sql
 
 script:
     - vendor/bin/tester tests/cases -s -p php -c tests/php-unix.ini $NTESTER_FLAGS

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @Test: Minetro\Nextras\Orm\QueryObject\QueryObject
+ * @Test: [unit] Minetro\Nextras\Orm\QueryObject\QueryObject
  */
 
 use Nextras\Dbal\Connection;
@@ -10,8 +10,9 @@ use Nextras\Dbal\Drivers\Mysqli\MysqliDriver;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Nextras\Dbal\Result\Result;
 use Tester\Assert;
+use Tests\Mocks\SimpleQueryObject;
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../../bootstrap.php';
 
 test(function () {
     $connection = Mockery::mock(Connection::class);

@@ -15,9 +15,11 @@
     "nextras/dbal": "^2.0.0"
   },
   "require-dev": {
-    "nette/tester": "~1.7.1",
+    "nette/tester": "^1.7.1",
     "nette/di": "^2.4.4",
-    "mockery/mockery": "^0.9.5"
+    "nextras/orm": "^2.2.0",
+    "mockery/mockery": "^0.9.5",
+    "ninjify/qa": "^0.3.0"
   },
   "autoload": {
     "psr-4": {
@@ -25,6 +27,38 @@
     }
   },
   "autoload-dev": {
-    "classmap": ["tests"]
+    "psr-4": {
+      "Tests\\Mocks\\": "tests/mocks"
+    }
+  },
+  "scripts": {
+    "qa": [
+      "@qa-linter",
+      "@qa-codesniffer"
+    ],
+    "qa-linter": [
+      "Ninjify\\Composer\\Script\\Linter::execute"
+    ],
+    "qa-codesniffer": [
+      "Ninjify\\Composer\\Script\\CodeSniffer::execute"
+    ],
+    "qa-codefixer": [
+      "Ninjify\\Composer\\Script\\CodeFixer::execute"
+    ]
+  },
+  "extra": {
+    "ninjify": {
+      "qa": {
+        "codesniffer": {
+          "folders": ["src", "tests"]
+        },
+        "codefixer": {
+          "folders": ["src", "tests"]
+        },
+        "linter": {
+          "folders": ["src", "tests"]
+        }
+      }
+    }
   }
 }

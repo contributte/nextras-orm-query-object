@@ -20,11 +20,31 @@ abstract class ExecutableQueryObject extends QueryObject
     }
 
     /**
+     * @param Result $result
+     * @return Result
+     */
+    public function postResult(Result $result)
+    {
+        return $result;
+    }
+
+    /**
      * @return Result
      */
     public function execute()
     {
-        return $this->fetch($this->connection);
+        $qb = $this->fetch($this->connection->createQueryBuilder());
+
+        // Execute query
+        $result = $this->connection->queryArgs(
+            $qb->getQuerySql(),
+            $qb->getQueryParameters()
+        );
+
+        // Decorate result
+        $result = $this->postResult($result);
+
+        return $result;
     }
 
 }

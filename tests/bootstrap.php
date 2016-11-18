@@ -1,8 +1,7 @@
 <?php
 
-/**
- * Test boostrap.
- */
+use Tester\Environment;
+use Tester\Helpers;
 
 if (@!include __DIR__ . '/../vendor/autoload.php') {
     echo 'Install Nette Tester using `composer update --dev`';
@@ -10,14 +9,18 @@ if (@!include __DIR__ . '/../vendor/autoload.php') {
 }
 
 // configure environment
-Tester\Environment::setup();
+Environment::setup();
 date_default_timezone_set('Europe/Prague');
 
 // create temporary directory
 define('TEMP_DIR', __DIR__ . '/tmp/' . getmypid());
 @mkdir(dirname(TEMP_DIR)); // @ - directory may already exist
-Tester\Helpers::purge(TEMP_DIR);
+Helpers::purge(TEMP_DIR);
 
+/**
+ * @param Closure $function
+ * @return void
+ */
 function test(\Closure $function)
 {
     $function();

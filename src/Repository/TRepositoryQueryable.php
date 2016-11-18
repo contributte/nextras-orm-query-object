@@ -2,9 +2,13 @@
 
 namespace Minetro\Nextras\Orm\QueryObject\Repository;
 
+use Minetro\Nextras\Orm\QueryObject\Exception\InvalidHydrationModeException;
+use Minetro\Nextras\Orm\QueryObject\ExecutableQueryObject;
+use Minetro\Nextras\Orm\QueryObject\Queryable;
 use Minetro\Nextras\Orm\QueryObject\QueryObject;
 use Nextras\Dbal\Connection;
 use Nextras\Dbal\Result\Result;
+use Nextras\Orm\Entity\IEntity;
 
 trait TRepositoryQueryable
 {
@@ -14,6 +18,7 @@ trait TRepositoryQueryable
 
     /**
      * @param Connection $connection
+     * @return void
      */
     public function injectConnection(Connection $connection)
     {
@@ -22,11 +27,29 @@ trait TRepositoryQueryable
 
     /**
      * @param QueryObject $queryObject
-     * @return Result
+     * @param int $hydrationMode
+     * @return Result|IEntity
      */
-    public function fetch(QueryObject $queryObject)
+    public function fetch(QueryObject $queryObject, $hydrationMode = Queryable::HYDRATION_RESULTSET)
     {
-        return $queryObject->fetch($this->connection);
+        $qb = $queryObject->fetch($this->connection->createQueryBuilder());
+
+        if ($hydrationMode === Queryable::HYDRATION_RESULTSET) {
+            $result = $this->connection->queryArgs(
+                $qb->getQuerySql(),
+                $qb->getQueryParameters()
+            );
+
+            if ($queryObject instanceof ExecutableQueryObject) {
+                $result = $queryObject->postResult($result);
+            }
+
+            return $result;
+        } else if ($hydrationMode === Queryable::HYDRATION_ENTITY) {
+            return $this->mapper->toCollection($qb);
+        } else {
+            throw new InvalidHydrationModeException(sprintf('Invalid hydration mode "%s"', $hydrationMode));
+        }
     }
 
 }

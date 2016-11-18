@@ -27,9 +27,21 @@ class QueryObjectContextAwareManager implements QueryObjectManager
      */
     public function fetch(QueryObject $queryObject)
     {
+        /** @var Connection $connection */
         $connection = $this->context->getByType(Connection::class);
 
-        return $queryObject->fetch($connection);
+        $qb = $queryObject->fetch($connection->createQueryBuilder());
+
+        $result = $connection->queryArgs(
+            $qb->getQuerySql(),
+            $qb->getQueryParameters()
+        );
+
+        if ($queryObject instanceof ExecutableQueryObject) {
+            $result = $queryObject->postResult($result);
+        }
+
+        return $result;
     }
 
     /**
