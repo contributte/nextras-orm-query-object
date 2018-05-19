@@ -1,6 +1,12 @@
 # Nextras\ORM Query Objects
 
-## Toc
+## Content
+
+- [Usage - how use it](#usage)
+    - [Simple Query Object](#simple-query-object)
+    - [Full Query Object](#full-query-object)
+    - [Executable Query Object](#executable-query-object)
+    - [Query Object Manager](#query-object-manager)
 
 ## Usage
 
@@ -10,10 +16,6 @@
 final class SimpleQueryObject extends QueryObject
 {
 
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
     public function doQuery(QueryBuilder $builder)
     {
         return $builder->select('*')->from('foobar');
@@ -24,7 +26,7 @@ final class SimpleQueryObject extends QueryObject
 
 ```php
 $qo = new SimpleQueryObject();
-$qom = new QueryObjectManager();
+$qom = $container->getByType(QueryObjectManager::class);
 $result = $qom->fetch($qo);
 ```
 
@@ -35,19 +37,11 @@ $result = $qom->fetch($qo);
 final class FullQueryObject extends QueryObject
 {
 
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
     public function doQuery(QueryBuilder $builder)
     {
         return $builder->select('*')->from('foobar');
     }
     
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
     protected function postQuery(QueryBuilder $builder)
     {
         return $builder;
@@ -58,7 +52,7 @@ final class FullQueryObject extends QueryObject
 
 ```php
 $qo = new FullQueryObject();
-$qom = new QueryObjectManager();
+$qom = $container->getByType(QueryObjectManager::class);
 $result = $qom->fetch($qo);
 ```
 
@@ -69,19 +63,11 @@ $result = $qom->fetch($qo);
 final class SimpleExecutableQueryObject extends ExecutableQueryObject
 {
 
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
     public function doQuery(QueryBuilder $builder)
     {
         return $builder->select('*')->from('foobar');
     }
 
-    /**
-     * @param Result $result
-     * @return Result
-     */
     protected function postResult(Result $result)
     {
         return $result;

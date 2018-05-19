@@ -29,7 +29,7 @@ composer require contributte/nextras-orm-query-object
 
 ## Overview
 
-- [Usage - how to register](https://github.com/contributte/nextras-orm-query-object/blob/master/.docs/README.md#usage-tada)
+- [Usage - how to use it](https://github.com/contributte/nextras-orm-query-object/blob/master/.docs/README.md#usage)
 
 ## Maintainers
 
