@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Mocks\Model;
 
@@ -7,24 +7,23 @@ use Nextras\Orm\Mapper\Memory\ArrayMapper;
 final class SimpleArrayMapper extends ArrayMapper
 {
 
-    /** @var array */
-    protected $data;
+	/** @var mixed[] */
+	protected $data;
 
-    /**
-     * @return array
-     */
-    protected function readData()
-    {
-        return $this->data;
-    }
+	/**
+	 * @return mixed[]
+	 */
+	protected function readData(): array
+	{
+		return $this->data;
+	}
 
-    /**
-     * @param array $data
-     * @return void
-     */
-    protected function saveData(array $data)
-    {
-        $this->data = $data;
-    }
+	/**
+	 * @param mixed[] $data
+	 */
+	protected function saveData(array $data): void
+	{
+		$this->data = $data;
+	}
 
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Mocks;
 
@@ -11,30 +11,17 @@ use Nextras\Dbal\QueryBuilder\QueryBuilder;
 final class SimpleConnection extends Connection
 {
 
-    /**
-     * @param array $config
-     */
-    public function __construct(array $config = [])
-    {
-    }
+	public function getDriver(): IDriver
+	{
+		$driver = Mockery::mock(MysqliDriver::class)->makePartial();
+		$driver->shouldReceive('connect')->andReturn(true);
 
-    /**
-     * @return IDriver
-     */
-    public function getDriver()
-    {
-        $driver = Mockery::mock(MysqliDriver::class)->makePartial();
-        $driver->shouldReceive('connect')->andReturn(TRUE);
+		return $driver;
+	}
 
-        return $driver;
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    public function createQueryBuilder()
-    {
-        return new QueryBuilder($this->getDriver());
-    }
+	public function createQueryBuilder(): QueryBuilder
+	{
+		return new QueryBuilder($this->getDriver());
+	}
 
 }

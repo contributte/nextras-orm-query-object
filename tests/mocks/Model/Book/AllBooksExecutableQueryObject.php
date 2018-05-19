@@ -1,20 +1,16 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Mocks\Model\Book;
 
-use Minetro\Nextras\Orm\QueryObject\ExecutableQueryObject;
+use Contributte\Nextras\Orm\QueryObject\ExecutableQueryObject;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 
 final class AllBooksExecutableQueryObject extends ExecutableQueryObject
 {
 
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('[*]')->from('[book]', 'b');
-    }
+	public function doQuery(QueryBuilder $builder): QueryBuilder
+	{
+		return $builder->select('[*]')->from('[book]', 'b');
+	}
 
 }

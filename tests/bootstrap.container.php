@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-use Minetro\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension;
+use Contributte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
@@ -13,17 +13,17 @@ use Tester\FileMock;
 require_once __DIR__ . '/bootstrap.php';
 
 $loader = new ContainerLoader(TEMP_DIR);
-$class = $loader->load(function (Compiler $compiler) {
-    $compiler->addExtension('inject', new InjectExtension());
-    $compiler->addExtension('di', new DIExtension());
-    $compiler->addExtension('dbal', new DbalExtension());
-    $compiler->addExtension('orm', new OrmExtension());
-    $compiler->addExtension('nextrasqueryobject', new NextrasQueryObjectExtension());
-    $compiler->loadConfig(FileMock::create('
+$class = $loader->load(function (Compiler $compiler): void {
+	$compiler->addExtension('inject', new InjectExtension());
+	$compiler->addExtension('di', new DIExtension());
+	$compiler->addExtension('dbal', new DbalExtension());
+	$compiler->addExtension('orm', new OrmExtension());
+	$compiler->addExtension('nextrasqueryobject', new NextrasQueryObjectExtension());
+	$compiler->loadConfig(FileMock::create('
     dbal:
         driver: mysqli
         host: 127.0.0.1
-        user: root
+        username: root
         password: ""
         database: nextras
    
@@ -38,7 +38,7 @@ $class = $loader->load(function (Compiler $compiler) {
 }, microtime());
 
 /** @var Container $container */
-$container = new $class;
+$container = new $class();
 $container->initialize();
 
 return $container;

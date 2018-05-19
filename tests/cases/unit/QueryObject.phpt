@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
- * @Test: [unit] Minetro\Nextras\Orm\QueryObject\QueryObject
+ * @Test: [unit] Contributte\Nextras\Orm\QueryObject\QueryObject
  */
 
 use Nextras\Dbal\Drivers\Mysqli\MysqliDriver;
@@ -11,10 +11,10 @@ use Tests\Mocks\SimpleQueryObject;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-test(function () {
-    $qo = new SimpleQueryObject();
-    $qb = $qo->fetch(new QueryBuilder(new MysqliDriver()));
+test(function (): void {
+	$qo = new SimpleQueryObject();
+	$qb = $qo->fetch(new QueryBuilder(new MysqliDriver()));
 
-    Assert::type(QueryBuilder::class, $qb);
-    Assert::equal('SELECT [*] FROM [foobar]', $qb->getQuerySql());
+	Assert::type(QueryBuilder::class, $qb);
+	Assert::equal('SELECT [*] FROM [foobar]', $qb->getQuerySql());
 });

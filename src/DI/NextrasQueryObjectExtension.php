@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Minetro\Nextras\Orm\QueryObject\DI;
+namespace Contributte\Nextras\Orm\QueryObject\DI;
 
-use Minetro\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
-use Minetro\Nextras\Orm\QueryObject\QueryObjectManager;
+use Contributte\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
+use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 use Nette\DI\CompilerExtension;
 use Nextras\Orm\Mapper\Mapper;
 use Nextras\Orm\Repository\Repository;
@@ -11,36 +11,32 @@ use Nextras\Orm\Repository\Repository;
 final class NextrasQueryObjectExtension extends CompilerExtension
 {
 
-    /**
-     * Register services
-     *
-     * @return void
-     */
-    public function loadConfiguration()
-    {
-        $builder = $this->getContainerBuilder();
+	/**
+	 * Register services
+	 */
+	public function loadConfiguration(): void
+	{
+		$builder = $this->getContainerBuilder();
 
-        $builder->addDefinition($this->prefix('manager'))
-            ->setClass(QueryObjectManager::class)
-            ->setFactory(QueryObjectContextAwareManager::class);
-    }
+		$builder->addDefinition($this->prefix('manager'))
+			->setClass(QueryObjectManager::class)
+			->setFactory(QueryObjectContextAwareManager::class);
+	}
 
-    /**
-     * Decorate services
-     *
-     * @return void
-     */
-    public function beforeCompile()
-    {
-        $builder = $this->getContainerBuilder();
+	/**
+	 * Decorate services
+	 */
+	public function beforeCompile(): void
+	{
+		$builder = $this->getContainerBuilder();
 
-        foreach ($builder->findByType(Repository::class) as $name => $def) {
-            $def->setInject(TRUE);
-        }
+		foreach ($builder->findByType(Repository::class) as $name => $def) {
+			$def->setInject(true);
+		}
 
-        foreach ($builder->findByType(Mapper::class) as $name => $def) {
-            $def->setInject(TRUE);
-        }
-    }
+		foreach ($builder->findByType(Mapper::class) as $name => $def) {
+			$def->setInject(true);
+		}
+	}
 
 }

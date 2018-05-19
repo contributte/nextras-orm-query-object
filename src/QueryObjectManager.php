@@ -1,22 +1,14 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Minetro\Nextras\Orm\QueryObject;
+namespace Contributte\Nextras\Orm\QueryObject;
 
 use Nextras\Dbal\Result\Result;
 
 interface QueryObjectManager
 {
 
-    /**
-     * @param string $class
-     * @return QueryObject
-     */
-    public function create($class);
+	public function create(string $class): QueryObject;
 
-    /**
-     * @param QueryObject $queryObject
-     * @return Result
-     */
-    public function fetch(QueryObject $queryObject);
+	public function fetch(QueryObject $queryObject): Result;
 
 }

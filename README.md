@@ -1,165 +1,52 @@
-# Nextras\ORM QueryObjects
-
-QueryObjects for Nextras\ORM.
+# Nextras\ORM Query Objects
 
 -----
 
-[![Build Status](https://img.shields.io/travis/minetro/nextras-orm-query-object.svg?style=flat-square)](https://travis-ci.org/minetro/nextras-orm-query-object)
-[![Code coverage](https://img.shields.io/coveralls/minetro/nextras-orm-query-object.svg?style=flat-square)](https://coveralls.io/r/minetro/nextras-orm-query-object)
-[![Downloads this Month](https://img.shields.io/packagist/dm/minetro/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/minetro/nextras-orm-query-object)
-[![Downloads total](https://img.shields.io/packagist/dt/minetro/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/minetro/nextras-orm-query-object)
-[![Latest stable](https://img.shields.io/packagist/v/minetro/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/minetro/nextras-orm-query-object)
-[![HHVM Status](https://img.shields.io/hhvm/minetro/nextras-orm-query-object.svg?style=flat-square)](http://hhvm.h4cc.de/package/minetro/nextras-orm-query-object)
+[![Build Status](https://img.shields.io/travis/contributte/nextras-orm-query-object.svg?style=flat-square)](https://travis-ci.org/contributte/nextras-orm-query-object)
+[![Code coverage](https://img.shields.io/coveralls/contributte/nextras-orm-query-object.svg?style=flat-square)](https://coveralls.io/r/contributte/nextras-orm-query-object)
+[![Licence](https://img.shields.io/packagist/l/contributte/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-query-object)
+
+[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-query-object)
+[![Downloads total](https://img.shields.io/packagist/dt/contributte/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-query-object)
+[![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-query-object.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-query-object)
 
 ## Discussion / Help
 
-[![Join the chat](https://img.shields.io/gitter/room/minetro/nette.svg?style=flat-square)](https://gitter.im/minetro/nette?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
 
 ## Install
 
-```sh
-composer require minetro/nextras-orm-query-object
+```
+composer require contributte/nextras-orm-query-object
 ```
 
-## Usage
+## Versions
 
-### Simple Query Object
+| State       | Version | Branch   | PHP      |
+|-------------|---------|----------|----------|
+| dev         | `^0.3`  | `master` | `>= 7.1` |
+| stable      | `^0.2`  | `master` | `>= 7.1` |
 
-```php
+## Overview
 
-final class SimpleQueryObject extends QueryObject
-{
+- [Usage - how to register](https://github.com/contributte/nextras-orm-query-object/blob/master/.docs/README.md#usage-tada)
 
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('*')->from('foobar');
-    }
+## Maintainers
 
-}
-```
-
-```php
-$qo = new SimpleQueryObject();
-$qom = new QueryObjectManager();
-$result = $qom->fetch($qo);
-```
-
-### Full Query Object
-
-```php
-
-final class FullQueryObject extends QueryObject
-{
-
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('*')->from('foobar');
-    }
-    
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
-    protected function postQuery(QueryBuilder $builder)
-    {
-        return $builder;
-    }
-
-}
-```
-
-```php
-$qo = new FullQueryObject();
-$qom = new QueryObjectManager();
-$result = $qom->fetch($qo);
-```
-
-### Executable Query Object
-
-```php
-
-final class SimpleExecutableQueryObject extends ExecutableQueryObject
-{
-
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('*')->from('foobar');
-    }
-
-    /**
-     * @param Result $result
-     * @return Result
-     */
-    protected function postResult(Result $result)
-    {
-        return $result;
-    }
-
-}
-```
-
-```php
-$qo = new SimpleExecutableQueryObject($connection);
-$result = $qo->execute();
-```
-
-### Query Object Manager
-
-You can register your own `QueryObjectManager` or setup via extension.
-
-```yaml
-extensions:
-    nextrasqueryobject: Minetro\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension
-```
-
-```php
-use Minetro\Nextras\Orm\QueryObject\QueryObjectManager;
-
-final class MyFacade1
-{
-
-    /** @var QueryObjectManager **/
-    private $qom;
-
-    public function foo()
-    {
-        $qo = $this->qom->create(MyExtraQueryObject::class);
-        $qo->setBar(1);
-        $qo->setBaz(TRUE);
-        $result = $this->qom->fetch($qo);
-    }
-
-}
-```
-
-```php
-final class MyFacade2
-{
-
-    /** @var IMyQueryObjectFactory @inject **/
-    public $myQueryObjectFactory;
-
-    public function foobar()
-    {
-        $qo = $this->myQueryObjectFactory->create(1, TRUE);
-        $result = $this->qom->fetch($qo);
-    }
-
-}
-```
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/f3l1x">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
+        </a>
+        </br>
+        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 -----
 
-Thanks for testing, reporting and contributing.
+Thank you for testing, reporting and contributing.

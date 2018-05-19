@@ -1,29 +1,29 @@
 {
-  "name": "minetro/nextras-orm-query-object",
+  "name": "contributte/nextras-orm-query-object",
   "description": "QueryObjects for Nextras ORM",
   "type": "library",
-  "license": ["BSD-3-Clause"],
-  "homepage": "https://github.com/minetro/nextras-orm-query-object",
+  "license": ["MIT"],
+  "homepage": "https://github.com/contributte/nextras-orm-query-object",
   "authors": [
     {
-      "name": "Milan Felix Sulc",
-      "homepage": "https://jfx.cz"
+      "name": "Milan Felix Šulc",
+      "homepage": "https://f3l1x.io"
     }
   ],
   "require": {
-    "php": ">= 5.6",
-    "nextras/dbal": "^2.0.0"
+    "php": ">= 7.1",
+    "nextras/dbal": "^3.0.0"
   },
   "require-dev": {
-    "nette/tester": "^1.7.1",
-    "nette/di": "^2.4.4",
-    "nextras/orm": "^2.2.0",
-    "mockery/mockery": "^0.9.5",
-    "ninjify/qa": "^0.3.0"
+    "ninjify/qa": "^0.8.0",
+    "ninjify/nunjuck": "^0.2.0",
+    "nette/di": "~2.4.12",
+    "nextras/orm": "^3.0.0",
+    "mockery/mockery": "^1.1.0"
   },
   "autoload": {
     "psr-4": {
-      "Minetro\\Nextras\\Orm\\QueryObject\\": "src/"
+      "Contributte\\Nextras\\Orm\\QueryObject\\": "src/"
     }
   },
   "autoload-dev": {
@@ -31,34 +31,31 @@
       "Tests\\Mocks\\": "tests/mocks"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
     "qa": [
-      "@qa-linter",
-      "@qa-codesniffer"
+      "linter src tests",
+      "codesniffer src tests"
     ],
-    "qa-linter": [
-      "Ninjify\\Composer\\Script\\Linter::execute"
+    "tester": [
+      "tester -s -p php --colors 1 -C tests/cases"
     ],
-    "qa-codesniffer": [
-      "Ninjify\\Composer\\Script\\CodeSniffer::execute"
+    "coverage": [
+      "tester -s -p php --colors 1 -C -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases"
     ],
-    "qa-codefixer": [
-      "Ninjify\\Composer\\Script\\CodeFixer::execute"
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:0.9.2",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:0.9"
+    ],
+    "phpstan": [
+      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src"
     ]
   },
   "extra": {
-    "ninjify": {
-      "qa": {
-        "codesniffer": {
-          "folders": ["src", "tests"]
-        },
-        "codefixer": {
-          "folders": ["src", "tests"]
-        },
-        "linter": {
-          "folders": ["src", "tests"]
-        }
-      }
+    "branch-alias": {
+      "dev-develop": "0.2.x-dev"
     }
   }
 }

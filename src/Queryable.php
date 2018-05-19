@@ -1,19 +1,16 @@
-<?php
-namespace Minetro\Nextras\Orm\QueryObject;
+<?php declare(strict_types = 1);
+
+namespace Contributte\Nextras\Orm\QueryObject;
 
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 
 interface Queryable
 {
 
-    // Hydration modes
-    const HYDRATION_RESULTSET = 1;
-    const HYDRATION_ENTITY = 2;
+	// Hydration modes
+	public const HYDRATION_RESULTSET = 1;
+	public const HYDRATION_ENTITY = 2;
 
-    /**
-     * @param QueryBuilder $builder
-     * @return QueryBuilder
-     */
-    public function doQuery(QueryBuilder $builder);
+	public function doQuery(QueryBuilder $builder): QueryBuilder;
 
 }
