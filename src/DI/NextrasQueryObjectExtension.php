@@ -19,7 +19,7 @@ final class NextrasQueryObjectExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('manager'))
-			->setClass(QueryObjectManager::class)
+			->setType(QueryObjectManager::class)
 			->setFactory(QueryObjectContextAwareManager::class);
 	}
 
