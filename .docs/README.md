@@ -87,11 +87,11 @@ You can register your own `QueryObjectManager` or setup via extension.
 
 ```yaml
 extensions:
-    nextras.queryobjects: Contibutte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension
+    nextras.queryobjects: Contributte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension
 ```
 
 ```php
-use Contibutte\Nextras\Orm\QueryObject\QueryObjectManager;
+use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 
 final class MyFacade1
 {
