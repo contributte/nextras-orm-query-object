@@ -5,6 +5,7 @@ namespace Contributte\Nextras\Orm\QueryObject\DI;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Extensions\InjectExtension;
 use Nextras\Orm\Mapper\Mapper;
 use Nextras\Orm\Repository\Repository;
 
@@ -31,11 +32,11 @@ final class NextrasQueryObjectExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		foreach ($builder->findByType(Repository::class) as $name => $def) {
-			$def->setInject(true);
+			$def->addTag(InjectExtension::TAG_INJECT);
 		}
 
 		foreach ($builder->findByType(Mapper::class) as $name => $def) {
-			$def->setInject(true);
+			$def->addTag(InjectExtension::TAG_INJECT);
 		}
 	}
 

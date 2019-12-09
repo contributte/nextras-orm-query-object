@@ -9,6 +9,9 @@ interface QueryObjectManager
 
 	public function create(string $class): QueryObject;
 
+	/**
+	 * @return Result<mixed>
+	 */
 	public function fetch(QueryObject $queryObject): Result;
 
 }

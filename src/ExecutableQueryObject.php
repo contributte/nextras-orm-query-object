@@ -16,11 +16,18 @@ abstract class ExecutableQueryObject extends QueryObject
 		$this->connection = $connection;
 	}
 
+	/**
+	 * @param Result<mixed> $result
+	 * @return Result<mixed>
+	 */
 	public function postResult(Result $result): Result
 	{
 		return $result;
 	}
 
+	/**
+	 * @return Result<mixed>
+	 */
 	public function execute(): Result
 	{
 		$qb = $this->fetch($this->connection->createQueryBuilder());
