@@ -1,16 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Cases\Integration;
-
-/**
- * @Test: [integration] Books
- */
+namespace Tests\Cases\E2E;
 
 use Contributte\Nextras\Orm\QueryObject\Queryable;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 use Nette\DI\Container;
+use Nextras\Dbal\IConnection;
 use Nextras\Dbal\Result\Result;
+use Nextras\Dbal\Utils\FileImporter;
 use Nextras\Orm\Collection\ICollection;
 use Tester\Assert;
 use Tester\TestCase;
@@ -31,6 +29,13 @@ final class BooksTest extends TestCase
 	public function __construct(Container $container)
 	{
 		$this->container = $container;
+	}
+
+	protected function setUp(): void
+	{
+		/** @var IConnection $connection */
+		$connection = $this->container->getByType(IConnection::class);
+		FileImporter::executeFile($connection, __DIR__ . '/../../fixtures/mysql.sql');
 	}
 
 	/**

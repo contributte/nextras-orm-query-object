@@ -1,15 +1,11 @@
 <?php declare(strict_types = 1);
 
-/**
- * @Test: [unit] Contributte\Nextras\Orm\QueryObject\QueryObject
- */
-
 use Nextras\Dbal\Drivers\Mysqli\MysqliDriver;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Tester\Assert;
 use Tests\Mocks\SimpleQueryObject;
 
-require_once __DIR__ . '/../../bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 test(function (): void {
 	$qo = new SimpleQueryObject();

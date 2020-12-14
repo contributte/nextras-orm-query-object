@@ -222,6 +222,15 @@ jobs:
 
     if: "github.event_name == 'push'"
 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: tests
+        ports:
+          - 3306:3306
+
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v2"

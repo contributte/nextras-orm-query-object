@@ -25,11 +25,11 @@ $class = $loader->load(function (Compiler $compiler): void {
         host: 127.0.0.1
         username: root
         password: ""
-        database: nextras
-   
+        database: tests
+
     orm:
         model: Tests\Mocks\Model\SimpleModel
-        
+
     services:
         - Nette\Caching\Storages\DevNullStorage
         - Nette\Caching\Cache
