@@ -22,8 +22,8 @@ Website ðŸš€ <a href="https://contributte.org">contributte.org</a> | Contact ðŸ‘
 
 To install latest version of `contributte/nextras-orm-query-object` use [Composer](https://getcomposer.org).
 
-```
-$ composer require contributte/nextras-orm-query-object
+```bash
+composer require contributte/nextras-orm-query-object
 ```
 
 ## Documentation
