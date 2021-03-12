@@ -3,10 +3,10 @@
 ## Content
 
 - [Usage - how use it](#usage)
-    - [Simple Query Object](#simple-query-object)
-    - [Full Query Object](#full-query-object)
-    - [Executable Query Object](#executable-query-object)
-    - [Query Object Manager](#query-object-manager)
+	- [Simple Query Object](#simple-query-object)
+	- [Full Query Object](#full-query-object)
+	- [Executable Query Object](#executable-query-object)
+	- [Query Object Manager](#query-object-manager)
 
 ## Usage
 
@@ -16,10 +16,10 @@
 final class SimpleQueryObject extends QueryObject
 {
 
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('*')->from('foobar');
-    }
+	public function doQuery(QueryBuilder $builder)
+	{
+		return $builder->select('*')->from('foobar');
+	}
 
 }
 ```
@@ -37,15 +37,15 @@ $result = $qom->fetch($qo);
 final class FullQueryObject extends QueryObject
 {
 
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('*')->from('foobar');
-    }
-    
-    protected function postQuery(QueryBuilder $builder)
-    {
-        return $builder;
-    }
+	public function doQuery(QueryBuilder $builder)
+	{
+		return $builder->select('*')->from('foobar');
+	}
+
+	protected function postQuery(QueryBuilder $builder)
+	{
+		return $builder;
+	}
 
 }
 ```
@@ -63,15 +63,15 @@ $result = $qom->fetch($qo);
 final class SimpleExecutableQueryObject extends ExecutableQueryObject
 {
 
-    public function doQuery(QueryBuilder $builder)
-    {
-        return $builder->select('*')->from('foobar');
-    }
+	public function doQuery(QueryBuilder $builder)
+	{
+		return $builder->select('*')->from('foobar');
+	}
 
-    protected function postResult(Result $result)
-    {
-        return $result;
-    }
+	protected function postResult(Result $result)
+	{
+		return $result;
+	}
 
 }
 ```
@@ -85,9 +85,9 @@ $result = $qo->execute();
 
 You can register your own `QueryObjectManager` or setup via extension.
 
-```yaml
+```neon
 extensions:
-    nextras.queryobjects: Contributte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension
+	nextras.queryobjects: Contributte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension
 ```
 
 ```php
@@ -96,16 +96,16 @@ use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 final class MyFacade1
 {
 
-    /** @var QueryObjectManager **/
-    private $qom;
+	/** @var QueryObjectManager **/
+	private $qom;
 
-    public function foo()
-    {
-        $qo = $this->qom->create(MyExtraQueryObject::class);
-        $qo->setBar(1);
-        $qo->setBaz(TRUE);
-        $result = $this->qom->fetch($qo);
-    }
+	public function foo()
+	{
+		$qo = $this->qom->create(MyExtraQueryObject::class);
+		$qo->setBar(1);
+		$qo->setBaz(TRUE);
+		$result = $this->qom->fetch($qo);
+	}
 
 }
 ```
@@ -114,14 +114,14 @@ final class MyFacade1
 final class MyFacade2
 {
 
-    /** @var IMyQueryObjectFactory @inject **/
-    public $myQueryObjectFactory;
+	/** @var IMyQueryObjectFactory @inject **/
+	public $myQueryObjectFactory;
 
-    public function foobar()
-    {
-        $qo = $this->myQueryObjectFactory->create(1, TRUE);
-        $result = $this->qom->fetch($qo);
-    }
+	public function foobar()
+	{
+		$qo = $this->myQueryObjectFactory->create(1, TRUE);
+		$result = $this->qom->fetch($qo);
+	}
 
 }
 ```
