@@ -35,7 +35,7 @@ final class BooksTest extends TestCase
 	{
 		/** @var IConnection $connection */
 		$connection = $this->container->getByType(IConnection::class);
-		FileImporter::executeFile($connection, __DIR__ . '/../../fixtures/mysql.sql');
+		FileImporter::executeFile($connection, __DIR__ . '/../../Fixtures/mysql.sql');
 	}
 
 	/**

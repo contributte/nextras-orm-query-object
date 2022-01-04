@@ -8,9 +8,7 @@
 		<properties>
 			<property name="rootNamespaces" type="array">
 				<element key="src" value="Contributte\Nextras\Orm\QueryObject"/>
-				<element key="tests/cases" value="Tests\Cases"/>
-				<element key="tests/fixtures" value="Tests\Fixtures"/>
-				<element key="tests/mocks" value="Tests\Mocks"/>
+				<element key="tests" value="Tests"/>
 			</property>
 			<property name="extensions" type="array" value="php,phpt" />
 		</properties>

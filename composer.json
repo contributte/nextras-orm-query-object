@@ -32,7 +32,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Mocks\\": "tests/mocks"
+      "Tests\\": "tests"
     }
   },
   "minimum-stability": "dev",
