@@ -37,6 +37,9 @@ class QueryObjectContextAwareManager implements QueryObjectManager
 		return $result;
 	}
 
+	/**
+	 * @param class-string $class
+	 */
 	public function create(string $class): QueryObject
 	{
 		$obj = $this->context->getByType($class);

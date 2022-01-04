@@ -7,6 +7,9 @@ use Nextras\Dbal\Result\Result;
 interface QueryObjectManager
 {
 
+	/**
+	 * @param class-string $class
+	 */
 	public function create(string $class): QueryObject;
 
 	/**
