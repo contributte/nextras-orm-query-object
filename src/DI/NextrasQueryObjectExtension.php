@@ -32,11 +32,11 @@ final class NextrasQueryObjectExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		foreach ($builder->findByType(Repository::class) as $name => $def) {
-			$def->addTag(InjectExtension::TAG_INJECT);
+			$def->addTag(InjectExtension::TagInject);
 		}
 
 		foreach ($builder->findByType(Mapper::class) as $name => $def) {
-			$def->addTag(InjectExtension::TAG_INJECT);
+			$def->addTag(InjectExtension::TagInject);
 		}
 	}
 

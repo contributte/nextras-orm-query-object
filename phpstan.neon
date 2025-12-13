@@ -6,5 +6,11 @@ includes:
 
 parameters:
 	level: 9
-	phpVersion: 70200
+	phpVersion: 80100
+	paths:
+		- src
+	scanDirectories:
+		- vendor/nette/di/src
+		- vendor/nextras/orm/src
+		- vendor/nextras/dbal/src
 
