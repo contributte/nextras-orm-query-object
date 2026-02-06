@@ -15,15 +15,12 @@
     "nextras/dbal": "^5.0.0"
   },
   "require-dev": {
-    "contributte/qa": "^0.4.0",
-    "contributte/tester": "^0.3.0",
-    "nette/di": "^3.0.1",
-    "nextras/orm": "^5.0.0",
-    "mockery/mockery": "^1.3.0",
-    "phpstan/phpstan": "^1.0.0",
-    "phpstan/phpstan-strict-rules": "^1.0.0",
-    "phpstan/phpstan-deprecation-rules": "^1.0.0",
-    "phpstan/phpstan-nette": "^1.0.0"
+    "contributte/phpstan": "~0.2.0",
+    "contributte/qa": "~0.4.0",
+    "contributte/tester": "~0.3.0",
+    "mockery/mockery": "^1.6.0",
+    "nette/di": "^3.2.0",
+    "nextras/orm": "^5.0.0"
   },
   "autoload": {
     "psr-4": {
@@ -37,14 +34,15 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "0.7.x-dev"
-    }
-  },
-  "config": {
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }
