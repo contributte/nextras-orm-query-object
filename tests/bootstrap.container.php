@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use Contributte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension;
+use Contributte\Tester\Environment;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
@@ -12,7 +13,7 @@ use Tester\FileMock;
 
 require_once __DIR__ . '/bootstrap.php';
 
-$loader = new ContainerLoader(TEMP_DIR);
+$loader = new ContainerLoader(Environment::getTestDir());
 $class = $loader->load(function (Compiler $compiler): void {
 	$compiler->addExtension('inject', new InjectExtension());
 	$compiler->addExtension('di', new DIExtension());

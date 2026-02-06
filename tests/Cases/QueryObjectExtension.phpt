@@ -2,6 +2,8 @@
 
 use Contributte\Nextras\Orm\QueryObject\DI\NextrasQueryObjectExtension;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
+use Contributte\Tester\Environment;
+use Contributte\Tester\Toolkit;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
@@ -9,9 +11,9 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-test('NextrasQueryObjectExtension registers QueryObjectManager service', function (): void {
-	$loader = new ContainerLoader(TEMP_DIR);
-	$class = $loader->load(function (Compiler $compiler): void {
+Toolkit::test(static function (): void {
+	$loader = new ContainerLoader(Environment::getTestDir());
+	$class = $loader->load(static function (Compiler $compiler): void {
 		$compiler->addExtension('nextrasqueryobject', new NextrasQueryObjectExtension());
 	}, microtime());
 

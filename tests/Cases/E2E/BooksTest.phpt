@@ -6,10 +6,12 @@ use Contributte\Nextras\Orm\QueryObject\Queryable;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 use Nette\DI\Container;
+use Nextras\Dbal\Drivers\Exception\ConnectionException;
 use Nextras\Dbal\IConnection;
 use Nextras\Dbal\Result\Result;
 use Nextras\Orm\Collection\ICollection;
 use Tester\Assert;
+use Tester\Environment;
 use Tester\TestCase;
 use Tests\Mocks\Model\Book\AllBooksExecutableQueryObject;
 use Tests\Mocks\Model\Book\AllBooksQueryObject;
@@ -18,6 +20,15 @@ use Tests\Mocks\Model\Book\BookRepository;
 use Tests\Mocks\Model\User\User;
 
 $container = require_once __DIR__ . '/../../bootstrap.container.php';
+
+/** @var IConnection $connection */
+$connection = $container->getByType(IConnection::class);
+
+try {
+	$connection->connect();
+} catch (ConnectionException $e) {
+	Environment::skip('MySQL connection not available: ' . $e->getMessage());
+}
 
 final class BooksTest extends TestCase
 {
@@ -124,8 +135,8 @@ final class BooksTest extends TestCase
 		$sql = file_get_contents(__DIR__ . '/../../Fixtures/mysql.sql');
 		assert($sql !== false);
 
-		foreach (array_filter(array_map('trim', explode(';', $sql))) as $query) {
-			$connection->query('%raw', $query);
+		foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) {
+			$connection->query('%raw', $statement);
 		}
 	}
 
