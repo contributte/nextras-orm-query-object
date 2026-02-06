@@ -2,28 +2,36 @@ name: "Nette Tester"
 
 on:
   pull_request:
+  workflow_dispatch:
 
   push:
     branches: ["*"]
 
   schedule:
-    - cron: "0 8 * * 1"
+    - cron: "0 10 * * 1"
 
 jobs:
-  build84:
+  test85:
     name: "Nette Tester"
-    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@v1
+    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@master
     with:
-        php: "8.4"
+      php: "8.5"
 
-  build83:
+  test84:
     name: "Nette Tester"
-    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@v1
+    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@master
     with:
-        php: "8.3"
+      php: "8.4"
 
-  build82:
+  test83:
     name: "Nette Tester"
-    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@v1
+    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@master
     with:
-        php: "8.2"
+      php: "8.3"
+
+  test82:
+    name: "Nette Tester"
+    uses: contributte/.github/.github/workflows/nette-tester-mysql.yml@master
+    with:
+      php: "8.2"
+      composer: "composer update --no-interaction --no-progress --prefer-dist --prefer-stable --prefer-lowest"
