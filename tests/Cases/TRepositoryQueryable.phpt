@@ -3,14 +3,15 @@
 use Contributte\Nextras\Orm\QueryObject\Exception\InvalidHydrationModeException;
 use Contributte\Nextras\Orm\QueryObject\Queryable;
 use Contributte\Nextras\Orm\QueryObject\Repository\TRepositoryQueryable;
+use Contributte\Tester\Toolkit;
 use Nextras\Dbal\Connection;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Nextras\Dbal\Result\Result;
+use Nextras\Orm\Collection\EmptyCollection;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 use Tester\Assert;
 use Tests\Mocks\SimpleQueryObject;
-use Tests\Mocks\StubCollection;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -26,7 +27,8 @@ class TestRepository
 
 }
 
-test('TRepositoryQueryable injectConnection stores connection', function (): void {
+// Test: TRepositoryQueryable injectConnection stores connection
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 
 	$repo = new TestRepository();
@@ -42,7 +44,8 @@ test('TRepositoryQueryable injectConnection stores connection', function (): voi
 	Mockery::close();
 });
 
-test('TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result', function (): void {
+// Test: TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$result = Mockery::mock(Result::class);
@@ -85,11 +88,13 @@ test('TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result', funct
 	Mockery::close();
 });
 
-test('TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection', function (): void {
+// Test: TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$mapper = Mockery::mock(DbalMapper::class);
-	$collection = new StubCollection();
+
+	$collection = new EmptyCollection();
 
 	$queryBuilder->shouldReceive('select')
 		->with('*')
@@ -122,7 +127,8 @@ test('TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection', fun
 	Mockery::close();
 });
 
-test('TRepositoryQueryable fetch throws InvalidHydrationModeException for invalid mode', function (): void {
+// Test: TRepositoryQueryable fetch throws InvalidHydrationModeException for invalid mode
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 
@@ -145,7 +151,7 @@ test('TRepositoryQueryable fetch throws InvalidHydrationModeException for invali
 
 	$queryObject = new SimpleQueryObject();
 
-	Assert::exception(function () use ($repo, $queryObject): void {
+	Assert::exception(static function () use ($repo, $queryObject): void {
 		$repo->fetch($queryObject, 999);
 	}, InvalidHydrationModeException::class, 'Invalid hydration mode "999"');
 

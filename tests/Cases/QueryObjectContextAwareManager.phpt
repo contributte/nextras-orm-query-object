@@ -3,6 +3,7 @@
 use Contributte\Nextras\Orm\QueryObject\Exception\InvalidObjectCreationException;
 use Contributte\Nextras\Orm\QueryObject\QueryObject;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
+use Contributte\Tester\Toolkit;
 use Nette\DI\Container;
 use Nextras\Dbal\Connection;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
@@ -12,7 +13,8 @@ use Tests\Mocks\SimpleQueryObject;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-test('QueryObjectContextAwareManager create returns QueryObject', function (): void {
+// Test: QueryObjectContextAwareManager create returns QueryObject
+Toolkit::test(static function (): void {
 	$queryObject = new SimpleQueryObject();
 
 	$container = Mockery::mock(Container::class);
@@ -30,7 +32,8 @@ test('QueryObjectContextAwareManager create returns QueryObject', function (): v
 	Mockery::close();
 });
 
-test('QueryObjectContextAwareManager create throws InvalidObjectCreationException for non-QueryObject', function (): void {
+// Test: QueryObjectContextAwareManager create throws InvalidObjectCreationException for non-QueryObject
+Toolkit::test(static function (): void {
 	$nonQueryObject = new stdClass();
 
 	$container = Mockery::mock(Container::class);
@@ -41,14 +44,15 @@ test('QueryObjectContextAwareManager create throws InvalidObjectCreationExceptio
 
 	$manager = new QueryObjectContextAwareManager($container);
 
-	Assert::exception(function () use ($manager): void {
+	Assert::exception(static function () use ($manager): void {
 		$manager->create(stdClass::class);
 	}, InvalidObjectCreationException::class);
 
 	Mockery::close();
 });
 
-test('QueryObjectContextAwareManager fetch returns Result', function (): void {
+// Test: QueryObjectContextAwareManager fetch returns Result
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$result = Mockery::mock(Result::class);

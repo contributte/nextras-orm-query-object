@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use Contributte\Nextras\Orm\QueryObject\ExecutableQueryObject;
+use Contributte\Tester\Toolkit;
 use Nextras\Dbal\Connection;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Nextras\Dbal\Result\Result;
@@ -48,7 +49,8 @@ class TestExecutableQueryObjectWithPostResult extends ExecutableQueryObject
 
 }
 
-test('ExecutableQueryObject builds query via fetch method', function (): void {
+// Test: ExecutableQueryObject builds query via fetch method
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 
@@ -70,7 +72,8 @@ test('ExecutableQueryObject builds query via fetch method', function (): void {
 	Mockery::close();
 });
 
-test('ExecutableQueryObject execute method uses connection', function (): void {
+// Test: ExecutableQueryObject execute method uses connection
+Toolkit::test(static function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$result = Mockery::mock(Result::class);
