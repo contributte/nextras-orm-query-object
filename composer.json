@@ -15,8 +15,8 @@
     "nextras/dbal": "^4.0.0"
   },
   "require-dev": {
-    "ninjify/qa": "^0.13",
-    "ninjify/nunjuck": "^0.4",
+    "contributte/qa": "^0.4.0",
+    "contributte/tester": "^0.3.0",
     "nette/di": "^3.0.1",
     "nextras/orm": "^4.0.0",
     "mockery/mockery": "^1.3.0",
