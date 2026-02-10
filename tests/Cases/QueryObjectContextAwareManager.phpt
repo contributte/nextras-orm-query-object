@@ -54,7 +54,7 @@ test('QueryObjectContextAwareManager fetch returns Result', function (): void {
 	$result = Mockery::mock(Result::class);
 
 	$queryBuilder->shouldReceive('select')
-		->with('[*]')
+		->with('*')
 		->once()
 		->andReturnSelf();
 

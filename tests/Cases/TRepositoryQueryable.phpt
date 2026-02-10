@@ -48,7 +48,7 @@ test('TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result', funct
 	$result = Mockery::mock(Result::class);
 
 	$queryBuilder->shouldReceive('select')
-		->with('[*]')
+		->with('*')
 		->once()
 		->andReturnSelf();
 
@@ -92,7 +92,7 @@ test('TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection', fun
 	$collection = new StubCollection();
 
 	$queryBuilder->shouldReceive('select')
-		->with('[*]')
+		->with('*')
 		->once()
 		->andReturnSelf();
 
@@ -127,7 +127,7 @@ test('TRepositoryQueryable fetch throws InvalidHydrationModeException for invali
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 
 	$queryBuilder->shouldReceive('select')
-		->with('[*]')
+		->with('*')
 		->once()
 		->andReturnSelf();
 

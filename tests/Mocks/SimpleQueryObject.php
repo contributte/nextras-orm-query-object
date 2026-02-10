@@ -10,7 +10,7 @@ final class SimpleQueryObject extends QueryObject
 
 	public function doQuery(QueryBuilder $builder): QueryBuilder
 	{
-		return $builder->select('[*]')->from('[foobar]');
+		return $builder->select('*')->from('[foobar]');
 	}
 
 }

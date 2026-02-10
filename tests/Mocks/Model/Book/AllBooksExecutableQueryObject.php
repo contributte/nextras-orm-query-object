@@ -10,7 +10,7 @@ final class AllBooksExecutableQueryObject extends ExecutableQueryObject
 
 	public function doQuery(QueryBuilder $builder): QueryBuilder
 	{
-		return $builder->select('[*]')->from('[book]', 'b');
+		return $builder->select('*')->from('[book]', 'b');
 	}
 
 }
