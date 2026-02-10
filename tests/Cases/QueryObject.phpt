@@ -7,7 +7,7 @@ use Tests\Mocks\SimpleQueryObject;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-test(function (): void {
+test('QueryObject builds query via fetch method', function (): void {
 	$qo = new SimpleQueryObject();
 	$qb = $qo->fetch(new QueryBuilder(new MysqliDriver()));
 

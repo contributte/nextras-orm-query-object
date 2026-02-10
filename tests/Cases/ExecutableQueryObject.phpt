@@ -37,6 +37,7 @@ class TestExecutableQueryObjectWithPostResult extends ExecutableQueryObject
 	public function postResult(Result $result): Result
 	{
 		$this->postResultCalled = true;
+
 		return parent::postResult($result);
 	}
 
@@ -47,8 +48,7 @@ class TestExecutableQueryObjectWithPostResult extends ExecutableQueryObject
 
 }
 
-// Test: ExecutableQueryObject builds query via fetch method
-test(function (): void {
+test('ExecutableQueryObject builds query via fetch method', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 
@@ -70,8 +70,7 @@ test(function (): void {
 	Mockery::close();
 });
 
-// Test: ExecutableQueryObject execute method uses connection
-test(function (): void {
+test('ExecutableQueryObject execute method uses connection', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$result = Mockery::mock(Result::class);

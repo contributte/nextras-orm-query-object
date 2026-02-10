@@ -23,19 +23,11 @@ $container = require_once __DIR__ . '/../../bootstrap.container.php';
 final class BooksTest extends TestCase
 {
 
-	/** @var Container */
-	private $container;
+	private Container $container;
 
 	public function __construct(Container $container)
 	{
 		$this->container = $container;
-	}
-
-	protected function setUp(): void
-	{
-		/** @var IConnection $connection */
-		$connection = $this->container->getByType(IConnection::class);
-		FileImporter::executeFile($connection, __DIR__ . '/../../Fixtures/mysql.sql');
 	}
 
 	/**
@@ -124,6 +116,13 @@ final class BooksTest extends TestCase
 		foreach ($books->findAll() as $b) {
 			$books->removeAndFlush($b);
 		}
+	}
+
+	protected function setUp(): void
+	{
+		/** @var IConnection $connection */
+		$connection = $this->container->getByType(IConnection::class);
+		FileImporter::executeFile($connection, __DIR__ . '/../../Fixtures/mysql.sql');
 	}
 
 }

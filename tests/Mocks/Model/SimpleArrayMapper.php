@@ -8,7 +8,7 @@ final class SimpleArrayMapper extends ArrayMapper
 {
 
 	/** @var mixed[] */
-	protected $data;
+	protected array $data;
 
 	/**
 	 * @return mixed[]
