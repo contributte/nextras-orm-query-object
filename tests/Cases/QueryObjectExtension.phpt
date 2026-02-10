@@ -9,7 +9,7 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-test(function (): void {
+test('NextrasQueryObjectExtension registers QueryObjectManager service', function (): void {
 	$loader = new ContainerLoader(TEMP_DIR);
 	$class = $loader->load(function (Compiler $compiler): void {
 		$compiler->addExtension('nextrasqueryobject', new NextrasQueryObjectExtension());

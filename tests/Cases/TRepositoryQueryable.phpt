@@ -21,13 +21,11 @@ class TestRepository
 
 	use TRepositoryQueryable;
 
-	/** @var Mapper */
-	public $mapper;
+	public Mapper $mapper;
 
 }
 
-// Test: TRepositoryQueryable injectConnection stores connection
-test(function (): void {
+test('TRepositoryQueryable injectConnection stores connection', function (): void {
 	$connection = Mockery::mock(Connection::class);
 
 	$repo = new TestRepository();
@@ -43,8 +41,7 @@ test(function (): void {
 	Mockery::close();
 });
 
-// Test: TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result
-test(function (): void {
+test('TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$result = Mockery::mock(Result::class);
@@ -87,8 +84,7 @@ test(function (): void {
 	Mockery::close();
 });
 
-// Test: TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection
-test(function (): void {
+test('TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$mapper = Mockery::mock(Mapper::class);
@@ -130,8 +126,7 @@ test(function (): void {
 	Mockery::close();
 });
 
-// Test: TRepositoryQueryable fetch throws InvalidHydrationModeException for invalid mode
-test(function (): void {
+test('TRepositoryQueryable fetch throws InvalidHydrationModeException for invalid mode', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 

@@ -12,8 +12,7 @@ use Tests\Mocks\SimpleQueryObject;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-// Test: QueryObjectContextAwareManager create returns QueryObject
-test(function (): void {
+test('QueryObjectContextAwareManager create returns QueryObject', function (): void {
 	$queryObject = new SimpleQueryObject();
 
 	$container = Mockery::mock(Container::class);
@@ -31,8 +30,7 @@ test(function (): void {
 	Mockery::close();
 });
 
-// Test: QueryObjectContextAwareManager create throws InvalidObjectCreationException for non-QueryObject
-test(function (): void {
+test('QueryObjectContextAwareManager create throws InvalidObjectCreationException for non-QueryObject', function (): void {
 	$nonQueryObject = new stdClass();
 
 	$container = Mockery::mock(Container::class);
@@ -50,8 +48,7 @@ test(function (): void {
 	Mockery::close();
 });
 
-// Test: QueryObjectContextAwareManager fetch returns Result
-test(function (): void {
+test('QueryObjectContextAwareManager fetch returns Result', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 	$result = Mockery::mock(Result::class);
