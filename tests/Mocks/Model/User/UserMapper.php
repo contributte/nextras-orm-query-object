@@ -2,9 +2,9 @@
 
 namespace Tests\Mocks\Model\User;
 
-use Nextras\Orm\Mapper\Mapper;
+use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class UserMapper extends Mapper
+final class UserMapper extends DbalMapper
 {
 
 }

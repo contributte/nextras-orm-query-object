@@ -8,7 +8,6 @@ use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 use Nette\DI\Container;
 use Nextras\Dbal\IConnection;
 use Nextras\Dbal\Result\Result;
-use Nextras\Dbal\Utils\FileImporter;
 use Nextras\Orm\Collection\ICollection;
 use Tester\Assert;
 use Tester\TestCase;
@@ -122,7 +121,12 @@ final class BooksTest extends TestCase
 	{
 		/** @var IConnection $connection */
 		$connection = $this->container->getByType(IConnection::class);
-		FileImporter::executeFile($connection, __DIR__ . '/../../Fixtures/mysql.sql');
+		$sql = file_get_contents(__DIR__ . '/../../Fixtures/mysql.sql');
+		assert($sql !== false);
+
+		foreach (array_filter(array_map('trim', explode(';', $sql))) as $query) {
+			$connection->query('%raw', $query);
+		}
 	}
 
 }

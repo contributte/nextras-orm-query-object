@@ -2,9 +2,9 @@
 
 namespace Tests\Mocks\Model\Book;
 
-use Nextras\Orm\Mapper\Mapper;
+use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class BookMapper extends Mapper
+final class BookMapper extends DbalMapper
 {
 
 }
