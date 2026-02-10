@@ -6,7 +6,7 @@ use Contributte\Nextras\Orm\QueryObject\QueryObjectContextAwareManager;
 use Contributte\Nextras\Orm\QueryObject\QueryObjectManager;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Extensions\InjectExtension;
-use Nextras\Orm\Mapper\Mapper;
+use Nextras\Orm\Mapper\IMapper;
 use Nextras\Orm\Repository\Repository;
 
 final class NextrasQueryObjectExtension extends CompilerExtension
@@ -35,7 +35,7 @@ final class NextrasQueryObjectExtension extends CompilerExtension
 			$def->addTag(InjectExtension::TagInject);
 		}
 
-		foreach ($builder->findByType(Mapper::class) as $def) {
+		foreach ($builder->findByType(IMapper::class) as $def) {
 			$def->addTag(InjectExtension::TagInject);
 		}
 	}
