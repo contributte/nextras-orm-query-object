@@ -7,9 +7,10 @@ use Nextras\Dbal\Connection;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Nextras\Dbal\Result\Result;
 use Nextras\Orm\Collection\ICollection;
-use Nextras\Orm\Mapper\Mapper;
+use Nextras\Orm\Mapper\Dbal\DbalMapper;
 use Tester\Assert;
 use Tests\Mocks\SimpleQueryObject;
+use Tests\Mocks\StubCollection;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -21,7 +22,7 @@ class TestRepository
 
 	use TRepositoryQueryable;
 
-	public Mapper $mapper;
+	public DbalMapper $mapper;
 
 }
 
@@ -87,13 +88,8 @@ test('TRepositoryQueryable fetch with HYDRATION_RESULTSET returns Result', funct
 test('TRepositoryQueryable fetch with HYDRATION_ENTITY returns ICollection', function (): void {
 	$connection = Mockery::mock(Connection::class);
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
-	$mapper = Mockery::mock(Mapper::class);
-
-	// Suppress deprecation warnings from ICollection (PHP 8.4 issue with implicit nullable params)
-	$previousErrorReporting = error_reporting();
-	error_reporting($previousErrorReporting & ~E_DEPRECATED);
-	$collection = Mockery::mock(ICollection::class);
-	error_reporting($previousErrorReporting);
+	$mapper = Mockery::mock(DbalMapper::class);
+	$collection = new StubCollection();
 
 	$queryBuilder->shouldReceive('select')
 		->with('[*]')

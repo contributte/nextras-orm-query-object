@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-use Nextras\Dbal\Drivers\Mysqli\MysqliDriver;
+use Nextras\Dbal\Platforms\IPlatform;
 use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Tester\Assert;
 use Tests\Mocks\SimpleQueryObject;
@@ -8,9 +8,12 @@ use Tests\Mocks\SimpleQueryObject;
 require_once __DIR__ . '/../bootstrap.php';
 
 test('QueryObject builds query via fetch method', function (): void {
+	$platform = Mockery::mock(IPlatform::class);
 	$qo = new SimpleQueryObject();
-	$qb = $qo->fetch(new QueryBuilder(new MysqliDriver()));
+	$qb = $qo->fetch(new QueryBuilder($platform));
 
 	Assert::type(QueryBuilder::class, $qb);
 	Assert::equal('SELECT [*] FROM [foobar]', $qb->getQuerySql());
+
+	Mockery::close();
 });
