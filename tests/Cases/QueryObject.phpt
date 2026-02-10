@@ -13,7 +13,7 @@ test('QueryObject builds query via fetch method', function (): void {
 	$qb = $qo->fetch(new QueryBuilder($platform));
 
 	Assert::type(QueryBuilder::class, $qb);
-	Assert::equal('SELECT [*] FROM [foobar]', $qb->getQuerySql());
+	Assert::equal('SELECT * FROM [foobar]', $qb->getQuerySql());
 
 	Mockery::close();
 });

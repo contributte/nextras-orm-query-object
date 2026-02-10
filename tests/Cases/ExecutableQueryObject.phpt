@@ -16,7 +16,7 @@ class TestExecutableQueryObject extends ExecutableQueryObject
 
 	public function doQuery(QueryBuilder $builder): QueryBuilder
 	{
-		return $builder->select('[*]')->from('[test_table]');
+		return $builder->select('*')->from('[test_table]');
 	}
 
 }
@@ -53,7 +53,7 @@ test('ExecutableQueryObject builds query via fetch method', function (): void {
 	$queryBuilder = Mockery::mock(QueryBuilder::class);
 
 	$queryBuilder->shouldReceive('select')
-		->with('[*]')
+		->with('*')
 		->once()
 		->andReturnSelf();
 
@@ -76,7 +76,7 @@ test('ExecutableQueryObject execute method uses connection', function (): void {
 	$result = Mockery::mock(Result::class);
 
 	$queryBuilder->shouldReceive('select')
-		->with('[*]')
+		->with('*')
 		->once()
 		->andReturnSelf();
 
