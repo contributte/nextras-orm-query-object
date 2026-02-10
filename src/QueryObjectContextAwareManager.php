@@ -10,8 +10,7 @@ use Nextras\Dbal\Result\Result;
 class QueryObjectContextAwareManager implements QueryObjectManager
 {
 
-	/** @var Container */
-	protected $context;
+	protected Container $context;
 
 	public function __construct(Container $context)
 	{
@@ -45,7 +44,7 @@ class QueryObjectContextAwareManager implements QueryObjectManager
 		$obj = $this->context->getByType($class);
 
 		if (!($obj instanceof QueryObject)) {
-			throw new InvalidObjectCreationException(sprintf('Created object must be typed of %s, type of %s given.', QueryObject::class, get_class($obj)));
+			throw new InvalidObjectCreationException(sprintf('Created object must be typed of %s, type of %s given.', QueryObject::class, $obj::class));
 		}
 
 		return $obj;

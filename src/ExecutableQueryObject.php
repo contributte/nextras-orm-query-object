@@ -8,8 +8,7 @@ use Nextras\Dbal\Result\Result;
 abstract class ExecutableQueryObject extends QueryObject
 {
 
-	/** @var Connection */
-	protected $connection;
+	protected Connection $connection;
 
 	public function __construct(Connection $connection)
 	{

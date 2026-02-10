@@ -7,11 +7,6 @@ use Nextras\Dbal\QueryBuilder\QueryBuilder;
 abstract class QueryObject implements Queryable
 {
 
-	protected function postQuery(QueryBuilder $builder): QueryBuilder
-	{
-		return $builder;
-	}
-
 	public function fetch(QueryBuilder $builder): QueryBuilder
 	{
 		// Build query
@@ -21,6 +16,11 @@ abstract class QueryObject implements Queryable
 		$qb = $this->postQuery($qb);
 
 		return $qb;
+	}
+
+	protected function postQuery(QueryBuilder $builder): QueryBuilder
+	{
+		return $builder;
 	}
 
 }

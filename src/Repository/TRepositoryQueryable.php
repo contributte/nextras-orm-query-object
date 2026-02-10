@@ -8,23 +8,19 @@ use Contributte\Nextras\Orm\QueryObject\Queryable;
 use Contributte\Nextras\Orm\QueryObject\QueryObject;
 use Nextras\Dbal\Connection;
 use Nextras\Dbal\Result\Result;
-use Nextras\Orm\Entity\IEntity;
+use Nextras\Orm\Collection\ICollection;
 
 trait TRepositoryQueryable
 {
 
-	/** @var Connection */
-	protected $connection;
+	protected Connection $connection;
 
 	public function injectConnection(Connection $connection): void
 	{
 		$this->connection = $connection;
 	}
 
-	/**
-	 * @return Result|IEntity
-	 */
-	public function fetch(QueryObject $queryObject, int $hydrationMode = Queryable::HYDRATION_RESULTSET)
+	public function fetch(QueryObject $queryObject, int $hydrationMode = Queryable::HYDRATION_RESULTSET): Result|ICollection
 	{
 		$qb = $queryObject->fetch($this->connection->createQueryBuilder());
 
