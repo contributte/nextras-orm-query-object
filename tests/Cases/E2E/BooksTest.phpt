@@ -19,6 +19,13 @@ use Tests\Mocks\Model\Book\Book;
 use Tests\Mocks\Model\Book\BookRepository;
 use Tests\Mocks\Model\User\User;
 
+require_once __DIR__ . '/../../bootstrap.php';
+
+// nextras/orm 5.0.x is not yet compatible with PHP 8.5 (null array offset in AbstractEntity)
+if (PHP_VERSION_ID >= 80500) {
+	Environment::skip('nextras/orm is not yet compatible with PHP 8.5');
+}
+
 $container = require_once __DIR__ . '/../../bootstrap.container.php';
 
 /** @var IConnection $connection */

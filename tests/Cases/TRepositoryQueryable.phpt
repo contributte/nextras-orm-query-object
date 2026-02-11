@@ -37,7 +37,6 @@ Toolkit::test(static function (): void {
 	// Using reflection to verify connection was stored
 	$reflection = new ReflectionClass($repo);
 	$property = $reflection->getProperty('connection');
-	$property->setAccessible(true);
 
 	Assert::same($connection, $property->getValue($repo));
 
